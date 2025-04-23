@@ -1,6 +1,8 @@
-#include<iostream>
+#include <iostream>
+#include "funkcje.hpp"
 using namespace std;
-int main(){
-	cout<<"test"<<endl;
+
+int main() {
+	test();
 	return 0;
 }
