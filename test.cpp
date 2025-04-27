@@ -18,6 +18,5 @@ int main(){
 		cout<<endl;
 	}*/
     pasjans tak(false);
-    tak.wyswietl_testowe();
     return 0;
 }

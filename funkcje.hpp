@@ -17,7 +17,7 @@ public:
     bool getKolor() const;
     bool pusta() const;
     void zmienKarte(const int symbol_docelowy,const int kolor_docelowy);
-    void wyswietl() const;
+    std::string wyswietl() const;
 };
 
 
@@ -33,4 +33,5 @@ public:
     void rozdajKraty();
     bool czyJestRuch() const;
     void wyswietl_testowe() const;
+    void wyswietl_ladne();
 };
