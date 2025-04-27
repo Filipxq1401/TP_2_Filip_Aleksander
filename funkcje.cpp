@@ -28,25 +28,28 @@ void karta::zmienKarte(const int symbol_docelowy,const int kolor_docelowy){
     if(znak_koloru<=2) kolor = true;
     else kolor = false;
 }
-void karta::wyswietl() const{
+//test
+std::string karta::wyswietl() const{
+    std::string wyjscie = "";
     if(pusta()){
-        std::cout<<"  ";
-        return;
+        return "  ";
     }
-    if(!kolor) std::cout<<"\033[31m";
-    if(symbol == 1) std::cout<<" A";
-    else if(symbol == 11) std::cout<<" J";
-    else if(symbol == 12) std::cout<<" Q";
-    else if(symbol == 13) std::cout<<" K";
-    else if(symbol == 10) std::cout<<symbol;
-    else std::cout<<" "<<symbol;
-
-    if(znak_koloru == 1) std::cout<<"♠";
-    else if(znak_koloru == 2) std::cout<<"♣";
-    else if(znak_koloru == 3) std::cout<<"♥";
-    else std::cout<<"♦";
-    if(!kolor) std::cout<<"\033[0m";
+    if(!kolor) wyjscie += "\033[31m";
+    if(symbol == 1) wyjscie +="A";
+    else if(symbol == 11) wyjscie +="J";
+    else if(symbol == 12) wyjscie +="Q";
+    else if(symbol == 13) wyjscie +="K";
+    else if(symbol == 10) wyjscie += "10";
+    else wyjscie += (char)('0' + symbol);
+    if(znak_koloru == 1) wyjscie +="♠";
+    else if(znak_koloru == 2) wyjscie +="♣";
+    else if(znak_koloru == 3) wyjscie +="♥";
+    else wyjscie += "♦";
+    if(!kolor) wyjscie +="\033[0m";
+    if(symbol!=10) wyjscie = wyjscie + " ";
+    return wyjscie;
 }
+
 
 pasjans::pasjans(const bool czy_czyscic){
     czy_cls = czy_czyscic;
@@ -87,30 +90,56 @@ void pasjans::rozdajKraty(){
         }
     }
 }
-void pasjans::wyswietl_testowe() const{
+void pasjans::wyswietl_ladne(){
+    std::vector<std::vector<std::string> > do_wyswietlenia;
+    do_wyswietlenia.resize(8);
+    for(int i=0;i<8;i++) do_wyswietlenia[i].resize(17,"      ");
+    for(int i=0;i<8;i++){
+        for(int j=0;j<pola_gry[i].size();j++){
+            do_wyswietlenia[i][2*j] = "╔══════╗";
+            do_wyswietlenia[i][2*j + 1] = "║" + pola_gry[i][j].wyswietl() + (std::string)"   ║";
+            if(j == pola_gry[i].size() - 1){
+                do_wyswietlenia[i][2*j + 2] = "║      ║";
+                do_wyswietlenia[i][2*j + 3] = "║   " + pola_gry[i][j].wyswietl() + (std::string)"║";
+                do_wyswietlenia[i][2*j+4] = "╚══════╝";
+            }
+        }
+    }
+    for(int i=0;i<17;i++){
+        for(int j=0;j<8;j++){
+            std::cout<<do_wyswietlenia[j][i]<<"      ";
+        }
+        std::cout<<std::endl;
+    }
+
+}
+
+/*void pasjans::wyswietl_testowe() const{
     if(czy_cls) system("cls");
     std::cout<<"Pola docelowe: "<<std::endl;
     for(int i=0;i<4;i++){
         std::cout<<"D"<<i+1<<": ";
-        pola_docelowe[i].wyswietl();
+        pola_docelowe[i].wyswietl_ladne();
         std::cout<<"    ";
     }
     std::cout<<std::endl<<"Pola pomocnicze: "<<std::endl;
     for(int i=0;i<4;i++){
         std::cout<<"P"<<i+1<<": ";
-        pola_pomocnicze[i].wyswietl();
+        pola_pomocnicze[i].wyswietl_ladne();
         std::cout<<"    ";
     }
     std::cout<<std::endl;
+    std::cout<<"G1: G2: G3: G4: G5: G6: G7: G8: "<<std::endl;
     for(int i=0;i<8;i++){
         std::cout<<"Pole Gry G"<<i+1<<" (ilość kart: "<<pola_gry[i].size()<<"): ";
-        for(int j=0;j<pola_gry[i].size();j++){
-            pola_gry[i][j].wyswietl();
+        for(int j=0; j<pola_gry[i].size(); j++){
+            pola_gry[i][j].wyswietl_ladne();
             std::cout<<" ";
         }
         std::cout<<std::endl;
     }
 }
+    */
 bool pasjans::czyJestRuch() const{
     for(int i=0;i<4;i++){ //czy jest jakieś pole pomocnicze puste
         if(pola_pomocnicze[i].pusta()) return true;

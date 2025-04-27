@@ -14,6 +14,6 @@ int main() {
 	else czy_cls = false; 
 	if(czy_cls) system("cls");
 	pasjans gra(czy_cls);
-	
+	gra.wyswietl_ladne();
 	return 0;
 }
