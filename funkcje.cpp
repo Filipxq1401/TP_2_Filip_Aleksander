@@ -28,6 +28,7 @@ void karta::zmienKarte(const int symbol_docelowy,const int kolor_docelowy){
     if(znak_koloru<=2) kolor = true;
     else kolor = false;
 }
+//test
 void karta::wyswietl() const{
     if(pusta()){
         std::cout<<"  ";
