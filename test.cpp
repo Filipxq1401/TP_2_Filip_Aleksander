@@ -8,15 +8,16 @@ using namespace std;
 int main(){
     //testowanie wyświetlania kart
     system("chcp 65001");
-    karta test(1,1);
-	for (int i = 1; i <= 12; i++){
+    /*karta test(1,1);
+	for (int i = 1; i <= 13; i++){
 		for (int j = 1; j <= 4; j++){
 			test.zmienKarte(i,j);
 			test.wyswietl();
 			cout<<"	";
 		}
 		cout<<endl;
-	}
-    pasjans tak;
+	}*/
+    pasjans tak(false);
+    tak.wyswietl_testowe();
     return 0;
 }

@@ -1,5 +1,8 @@
 #pragma once
+#include<iostream>
 #include<vector>
+#include<ctime>
+#include<cstdlib>
 class karta
 {
 private:
@@ -12,6 +15,7 @@ public:
     int getSymbol() const;
     int getZnakKoloru() const;
     bool getKolor() const;
+    bool pusta() const;
     void zmienKarte(const int symbol_docelowy,const int kolor_docelowy);
     void wyswietl() const;
 };
@@ -23,8 +27,10 @@ private:
     std::vector<std::vector<karta> > pola_gry;
     std::vector<karta> pola_docelowe;
     std::vector<karta> pola_pomocnicze;
+    bool czy_cls;
 public:
-    pasjans();
+    pasjans(const bool czy_czyscic);
     void rozdajKraty();
-
+    bool czyJestRuch() const;
+    void wyswietl_testowe() const;
 };

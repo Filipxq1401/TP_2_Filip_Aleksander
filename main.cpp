@@ -4,12 +4,16 @@
 #include "funkcje.hpp"
 #include <cstdlib>
 #include<iostream>
-using namespace std;
-
 int main() {
 	system("chcp 65001");
-	//system("cls");
-	
+	std::cout<<"Czy chcesz żeby program czyścił konsolę?(Y/N) ";
+	char znak;
+	bool czy_cls;
+	std::cin>>znak;
+	if(znak == 'Y' || znak =='y') czy_cls=true;
+	else czy_cls = false; 
+	if(czy_cls) system("cls");
+	pasjans gra(czy_cls);
 	
 	return 0;
 }

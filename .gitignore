@@ -32,3 +32,4 @@
 *.app
 # ignorowanie folderu z cmakiem
 build
+.vscode
