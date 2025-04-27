@@ -32,7 +32,6 @@ public:
     pasjans(const bool czy_czyscic);
     void rozdajKraty();
     bool czyJestRuch() const;
-    void wyswietl_testowe() const;
-    void wyswietl_ladne(); 
+    void wyswietl_ladne() const; 
     std::vector<std::vector<karta> > getPola_gry() const;
 };

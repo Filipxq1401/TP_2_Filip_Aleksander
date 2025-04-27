@@ -8,11 +8,11 @@ int main() {
 	system("chcp 65001");
 	std::cout<<"Czy chcesz żeby program czyścił konsolę?(Y/N) ";
 	char znak;
-	bool czy_cls;
-	std::cin>>znak;
-	if(znak == 'Y' || znak =='y') czy_cls=true;
-	else czy_cls = false; 
-	if(czy_cls) system("cls");
+	bool czy_cls = false;
+	//std::cin>>znak;
+	//if(znak == 'Y' || znak =='y') czy_cls=true;
+	//else czy_cls = false; 
+	//if(czy_cls) system("cls");
 	pasjans gra(czy_cls);
 	gra.wyswietl_ladne();
 	return 0;
