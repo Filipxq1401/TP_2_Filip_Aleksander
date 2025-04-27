@@ -151,3 +151,6 @@ bool pasjans::czyJestRuch() const{
     }
     return false;
 }
+std::vector<std::vector<karta> > pasjans::getPola_gry() const{
+    return pola_gry;
+}

@@ -33,4 +33,5 @@ public:
     void rozdajKraty();
     bool czyJestRuch() const;
     void wyswietl_testowe() const;
+    std::vector<std::vector<karta> > getPola_gry() const;
 };
