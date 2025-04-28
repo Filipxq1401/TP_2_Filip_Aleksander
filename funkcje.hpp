@@ -35,12 +35,14 @@ private:
     std::vector<karta> pola_pomocnicze;
     bool czy_cls;
 public:
-    pasjans(const bool czy_czyscic);
+    pasjans();
     void rozdajKraty();
     bool czyJestRuch() const;
     void wyswietl_ladne() const; 
     bool czyKoniec() const;
     bool czyRuchJestdozwolony(const ruch potencjalny) const;
     void wykonajRuch(const ruch dobry_ruch);
+    void ustawCls(const bool czyszczenie);
     std::vector<std::vector<karta> > getPola_gry() const;
 };
+void tasuj(pasjans& gra);

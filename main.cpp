@@ -3,9 +3,12 @@
 //Aleksander Kargol 203225 ACIR 4A
 #include "funkcje.hpp"
 #include <cstdlib>
-#include<iostream>
-#include<string>
+#include <iostream>
+#include <string>
+#include <thread>
 int main() {
+	pasjans gra;
+	std::thread watekTasowania(tasuj,std::ref(gra));
 	system("chcp 65001");
 	std::cout<<"Czy chcesz żeby program czyścił konsolę?(Y/N) ";
 	char znak;
@@ -15,7 +18,8 @@ int main() {
 	else czy_cls = false; 
 	if(czy_cls) system("cls");
 	int tura = 1;
-	pasjans gra(czy_cls);
+	watekTasowania.join();
+	gra.ustawCls(czy_cls);
 	std::cin.ignore();
 	while (!gra.czyKoniec()){
 		if(!gra.czyJestRuch()){

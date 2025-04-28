@@ -7,7 +7,9 @@
 using namespace std;
 
 int main(){
-    pasjans test(false);
+    pasjans test;
+    test.ustawCls(false);
+    test.rozdajKraty();
     //test czy po potasowaniu są wszystkie karty i się nie powtarzają
     std::vector<std::vector<karta> > potasowane_karty = test.getPola_gry();
     int ilosc_kart = 0;

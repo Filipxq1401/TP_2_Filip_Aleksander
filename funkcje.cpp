@@ -47,15 +47,16 @@ std::string karta::wyswietl() const{
     if(!kolor) wyjscie +="\033[0m";
     return wyjscie;
 }
-pasjans::pasjans(const bool czy_czyscic){
-    czy_cls = czy_czyscic;
+pasjans::pasjans(){
     pola_gry.resize(8);
     karta puste_pole(0,0);
     for(int i=0;i<4;i++){
         pola_docelowe.push_back(puste_pole);
         pola_pomocnicze.push_back(puste_pole);
     }
-    rozdajKraty(); //później trzeba zrobić z tymi thread i ref na wymagania dodatkowe
+}
+void pasjans::ustawCls(const bool czyszczenie){
+    czy_cls = czyszczenie;
 }
 void pasjans::rozdajKraty(){
     std::vector<karta> talia;
@@ -337,4 +338,7 @@ ruch dekoduj(const std::string komenda,bool& poprawnosc){
     if(zdekodowany.typ_pola_1 == zdekodowany.typ_pola_2 && zdekodowany.typ_pola_1==0 && zdekodowany.numer_pola_1==zdekodowany.numer_pola_2) poprawnosc=false;
     if(!poprawnosc) std::cout<<"Niepoprawny ruch, wprowadź ponownie: ";
     return zdekodowany;
+}
+void tasuj(pasjans& gra){
+    gra.rozdajKraty();
 }
