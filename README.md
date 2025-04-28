@@ -5,3 +5,5 @@ Aleksander Kargol ACIR 4A
 Napisz program pozwalający układać pasjans Freecell (reguły: http://pl.wikipedia.org/wiki/FreeCell ). \
 Program powinien wykorzystywać kontenery biblioteki STL.\
 Konieczne jest zaimplementowanie reguł sprawdzających poprawność ruchów.
+## Wymagania dodatkowe
+Tasowanie w osobnym wątku (std::thread i std::ref)
