@@ -19,6 +19,12 @@ public:
     void zmienKarte(const int symbol_docelowy,const int kolor_docelowy);
     std::string wyswietl() const;
 };
+struct ruch
+{
+    int typ_pola_1,typ_pola_2;
+    int numer_pola_1,numer_pola_2;
+};
+ruch dekoduj(const std::string komenda,bool& poprawnosc);
 
 
 class pasjans
@@ -33,5 +39,8 @@ public:
     void rozdajKraty();
     bool czyJestRuch() const;
     void wyswietl_ladne() const; 
+    bool czyKoniec() const;
+    bool czyRuchJestdozwolony(const ruch potencjalny) const;
+    void wykonajRuch(const ruch dobry_ruch);
     std::vector<std::vector<karta> > getPola_gry() const;
 };

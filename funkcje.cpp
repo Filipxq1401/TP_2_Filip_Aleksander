@@ -89,57 +89,57 @@ void pasjans::wyswietl_ladne() const{
     std::cout<<std::endl;
     std::cout<<"              Pola Pomocnicze:                                             Pola Docelowe:"<<std::endl;
     std::cout<<"   P1          P2          P3          P4                      D1          D2          D3          D4";
-    std::vector<std::vector<std::string> > polonczone;
-    polonczone.resize(8);
+    std::vector<std::vector<std::string> > polaczone;
+    polaczone.resize(8);
     for(int i=0;i<8;i++){
-        polonczone[i].resize(5);
+        polaczone[i].resize(5);
     }
     for(int i=0;i<4;i++){
         if(pola_pomocnicze[i].getSymbol()==0){
-            polonczone[i][0]="┌──────┐";
-            polonczone[i][1]="│      │";
-            polonczone[i][2]="│      │";
-            polonczone[i][3]="│      │";
-            polonczone[i][4]="└──────┘";
+            polaczone[i][0]="┌──────┐";
+            polaczone[i][1]="│      │";
+            polaczone[i][2]="│      │";
+            polaczone[i][3]="│      │";
+            polaczone[i][4]="└──────┘";
         }
         else{
-            polonczone[i][0] = "╔══════╗";
-            polonczone[i][1] ="║" + pola_pomocnicze[i].wyswietl();
-            polonczone[i][3] = "║   ";
+            polaczone[i][0] = "╔══════╗";
+            polaczone[i][1] ="║" + pola_pomocnicze[i].wyswietl();
+            polaczone[i][3] = "║   ";
             if(pola_pomocnicze[i].getSymbol()!=10){
-                polonczone[i][1]+=" ";
-                polonczone[i][3]+=" ";
+                polaczone[i][1]+=" ";
+                polaczone[i][3]+=" ";
             }
-            polonczone[i][1]+= "   ║";
-            polonczone[i][3]+=pola_pomocnicze[i].wyswietl()+ "║";
-            polonczone[i][2] = "║      ║";
-            polonczone[i][4] = "╚══════╝";
+            polaczone[i][1]+= "   ║";
+            polaczone[i][3]+=pola_pomocnicze[i].wyswietl()+ "║";
+            polaczone[i][2] = "║      ║";
+            polaczone[i][4] = "╚══════╝";
          }
         if(pola_docelowe[i].getSymbol()==0){
-            polonczone[i+4][0]="┌──────┐";
-            polonczone[i+4][1]="│      │";
-            polonczone[i+4][2]="│      │";
-            polonczone[i+4][3]="│      │";
-            polonczone[i+4][4]="└──────┘";
+            polaczone[i+4][0]="┌──────┐";
+            polaczone[i+4][1]="│      │";
+            polaczone[i+4][2]="│      │";
+            polaczone[i+4][3]="│      │";
+            polaczone[i+4][4]="└──────┘";
         }
         else{
-            polonczone[i+4][0] = "╔══════╗";
-            polonczone[i+4][1] = "║" + pola_docelowe[i].wyswietl();
-            polonczone[i+4][3] = "║   ";
+            polaczone[i+4][0] = "╔══════╗";
+            polaczone[i+4][1] = "║" + pola_docelowe[i].wyswietl();
+            polaczone[i+4][3] = "║   ";
             if(pola_docelowe[i].getSymbol()!=10){
-                polonczone[i+4][1]+=" ";
-                polonczone[i+4][3]+=" ";
+                polaczone[i+4][1]+=" ";
+                polaczone[i+4][3]+=" ";
             }
-            polonczone[i+4][1] += "   ║";
-            polonczone[i+4][3] += pola_docelowe[i].wyswietl()+ "║";
-            polonczone[i+4][2] = "║      ║";
-            polonczone[i+4][4] = "╚══════╝";
+            polaczone[i+4][1] += "   ║";
+            polaczone[i+4][3] += pola_docelowe[i].wyswietl()+ "║";
+            polaczone[i+4][2] = "║      ║";
+            polaczone[i+4][4] = "╚══════╝";
         }
     }
     for(int i=0;i<5;i++){
         std::cout<<std::endl;
         for(int j=0;j<8;j++){
-            std::cout<<polonczone[j][i]<<"    ";
+            std::cout<<polaczone[j][i]<<"    ";
             if(j==3) std::cout<<"            ";
         }
     }
@@ -147,7 +147,12 @@ void pasjans::wyswietl_ladne() const{
     std::cout<<std::endl<<"Pola Gry:  G1          G2          G3          G4          G5          G6          G7          G8";
     std::vector<std::vector<std::string> > do_wyswietlenia;
     do_wyswietlenia.resize(8);
-    for(int i=0;i<8;i++) do_wyswietlenia[i].resize(17,"      ");
+    int max = pola_gry[0].size();
+    for(int i=1;i<8;i++){
+        if(pola_gry[i].size() > max) max = pola_gry[i].size();
+    }
+    int n = max*2 +3;
+    for(int i=0;i<8;i++) do_wyswietlenia[i].resize(n,"        ");
     for(int i=0;i<8;i++){
         for(int j=0;j<pola_gry[i].size();j++){
             do_wyswietlenia[i][2*j] = "╔══════╗";
@@ -163,12 +168,13 @@ void pasjans::wyswietl_ladne() const{
             }
         }
     }
-    for(int i=0;i<17;i++){
+    for(int i=0;i<n;i++){
         std::cout<<std::endl<<"        ";
         for(int j=0;j<8;j++){
             std::cout<<do_wyswietlenia[j][i]<<"    ";
         }
     }
+    std::cout<<std::endl;
 }
 bool pasjans::czyJestRuch() const{
     for(int i=0;i<4;i++){ //czy jest jakieś pole pomocnicze puste
@@ -210,6 +216,125 @@ bool pasjans::czyJestRuch() const{
     }
     return false;
 }
+bool pasjans::czyKoniec() const{
+    for(int i=0;i<8;i++){
+        if(!pola_gry[i].empty()) return false;
+    }
+    for(int i=0;i<4;i++){
+        if(!pola_pomocnicze[i].pusta()) return false;
+    }
+    return true;
+}
 std::vector<std::vector<karta> > pasjans::getPola_gry() const{
     return pola_gry;
+}
+bool pasjans::czyRuchJestdozwolony(const ruch potencjalny) const{
+    bool decyzja = false;
+    if(potencjalny.typ_pola_1==0){
+        if(pola_gry[potencjalny.numer_pola_1].empty()) decyzja=false;
+        else if(potencjalny.typ_pola_2==0){
+            if(pola_gry[potencjalny.numer_pola_2].empty()) decyzja = true;
+            else if(pola_gry[potencjalny.numer_pola_1].back().getKolor()!=pola_gry[potencjalny.numer_pola_2].back().getKolor() && pola_gry[potencjalny.numer_pola_2].back().getSymbol()-pola_gry[potencjalny.numer_pola_1].back().getSymbol()==1) decyzja = true;
+        }
+        else if(potencjalny.typ_pola_2==1){
+            if(pola_pomocnicze[potencjalny.numer_pola_2].pusta()) decyzja=true;
+        }
+        else{
+            if(pola_docelowe[potencjalny.numer_pola_2].pusta()){
+                if(pola_gry[potencjalny.numer_pola_1].back().getSymbol()==1) decyzja=true;
+            }
+            else if(pola_docelowe[potencjalny.numer_pola_2].getZnakKoloru() == pola_gry[potencjalny.numer_pola_1].back().getZnakKoloru() && pola_gry[potencjalny.numer_pola_1].back().getSymbol() - pola_docelowe[potencjalny.numer_pola_2].getSymbol() == 1) decyzja = true;
+        }
+    }
+    else{
+        if(pola_pomocnicze[potencjalny.numer_pola_1].pusta()) decyzja = false;
+        else if(potencjalny.typ_pola_2==0){
+            if(pola_gry[potencjalny.numer_pola_2].empty()) decyzja=true;
+            else if(pola_pomocnicze[potencjalny.numer_pola_1].getKolor()!=pola_gry[potencjalny.numer_pola_2].back().getKolor() && pola_gry[potencjalny.numer_pola_2].back().getSymbol() - pola_pomocnicze[potencjalny.numer_pola_1].getSymbol() == 1) decyzja = true;
+        }
+        else{
+            if(pola_docelowe[potencjalny.numer_pola_2].pusta()){
+                if(pola_pomocnicze[potencjalny.numer_pola_1].getSymbol()==1) decyzja=true;
+            }
+            else if(pola_docelowe[potencjalny.numer_pola_2].getZnakKoloru() == pola_pomocnicze[potencjalny.numer_pola_1].getZnakKoloru() && pola_pomocnicze[potencjalny.numer_pola_1].getSymbol() - pola_docelowe[potencjalny.numer_pola_2].getSymbol() == 1) decyzja = true;
+            
+        }
+    }
+    if(!decyzja) std::cout<<"Nie dozwolony ruch, wprowadz poprawny ruch: ";
+    return decyzja;
+}
+void pasjans::wykonajRuch(const ruch dobry_ruch){
+    if(dobry_ruch.typ_pola_1==0){
+        if(dobry_ruch.typ_pola_2==0){
+            pola_gry[dobry_ruch.numer_pola_2].push_back(pola_gry[dobry_ruch.numer_pola_1].back());
+        }
+        else if(dobry_ruch.typ_pola_2==1){
+            pola_pomocnicze[dobry_ruch.numer_pola_2] = pola_gry[dobry_ruch.numer_pola_1].back();
+        }
+        else{
+            pola_docelowe[dobry_ruch.numer_pola_2] = pola_gry[dobry_ruch.numer_pola_1].back();
+        }
+        pola_gry[dobry_ruch.numer_pola_1].pop_back();
+    }
+    else{
+        if(dobry_ruch.typ_pola_2==0){
+            pola_gry[dobry_ruch.numer_pola_2].push_back(pola_pomocnicze[dobry_ruch.numer_pola_1]);
+        }
+        else{
+            pola_docelowe[dobry_ruch.numer_pola_2] = pola_pomocnicze[dobry_ruch.numer_pola_1];
+        }
+        pola_pomocnicze[dobry_ruch.numer_pola_1].zmienKarte(0,0);
+    }
+}
+ruch dekoduj(const std::string komenda,bool& poprawnosc){
+    poprawnosc = true;
+    if(komenda == "help"){
+        std::cout<<"Schemat komendy: "<<std::endl;
+        std::cout<<"Typ i numer pierwszego pola - typ i numer drugiego pola"<<std::endl;
+        std::cout<<"Przykładowa komenda: G1 - P2"<<std::endl;
+        std::cout<<"Reguły ruchów znajdziesz: http://pl.wikipedia.org/wiki/FreeCell"<<std::endl;
+        std::cout<<"Podaj swój ruch: "<<std::endl;
+        poprawnosc = false;
+        return ruch{0,0,0,0};
+    }
+    ruch zdekodowany = {0,0,0,0};
+    if(komenda.size()!=7){
+        poprawnosc = false;
+    }
+    else{
+        if(komenda[0]=='G' || komenda[0]=='g'){
+            zdekodowany.typ_pola_1 = 0;
+            if(komenda[1]>='1' && komenda[1]<='8') zdekodowany.numer_pola_1 = komenda[1] - '0' - 1;
+            else poprawnosc = false;
+        }
+        else if(komenda[0]=='P' || komenda[0]=='p'){
+            zdekodowany.typ_pola_1 = 1;
+            if(komenda[1]>='1' && komenda[1]<='4') zdekodowany.numer_pola_1 = komenda[1] - '0' - 1;
+            else poprawnosc = false;
+        }
+        else poprawnosc = false;
+
+        if(!(komenda[2]==' ' && komenda[3]=='-' && komenda[4]==' ')) poprawnosc = false;
+
+        if(komenda[5]=='G' || komenda[5]=='g'){
+            zdekodowany.typ_pola_2 = 0;
+            if(komenda[6]>='1' && komenda[6]<='8') zdekodowany.numer_pola_2 = komenda[6] - '0' - 1;
+            else poprawnosc = false;
+        }
+        else if(komenda[5]=='P' || komenda[5]=='p'){
+            zdekodowany.typ_pola_2 = 1;
+            if(komenda[6]>='1' && komenda[6]<='4') zdekodowany.numer_pola_2 = komenda[6] - '0' - 1;
+            else poprawnosc = false;
+        }
+        else if(komenda[5]=='D' || komenda[5]=='d'){
+            zdekodowany.typ_pola_2 = 2;
+            if(komenda[6]>='1' && komenda[6]<='4') zdekodowany.numer_pola_2 = komenda[6] - '0' - 1;
+            else poprawnosc = false;
+        }
+        else poprawnosc = false;
+    }
+    if(zdekodowany.typ_pola_1 == zdekodowany.typ_pola_2 && zdekodowany.typ_pola_1!=0) poprawnosc=false;
+    if(zdekodowany.typ_pola_1 == zdekodowany.typ_pola_2 && zdekodowany.typ_pola_1==0 && zdekodowany.numer_pola_1==zdekodowany.numer_pola_2) poprawnosc=false;
+    if(!poprawnosc) std::cout<<"Niepoprawny ruch, wprowadź ponownie: ";
+    return zdekodowany;
 }
