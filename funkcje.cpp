@@ -153,19 +153,29 @@ void pasjans::wyswietl_ladne() const{
         if(pola_gry[i].size() > max) max = pola_gry[i].size();
     }
     int n = max*2 +3;
+    if(n == 3) n=5;
     for(int i=0;i<8;i++) do_wyswietlenia[i].resize(n,"        ");
     for(int i=0;i<8;i++){
-        for(int j=0;j<pola_gry[i].size();j++){
-            do_wyswietlenia[i][2*j] = "╔══════╗";
-            do_wyswietlenia[i][2*j + 1] = "║" + pola_gry[i][j].wyswietl();
-            if(pola_gry[i][j].getSymbol()!=10) do_wyswietlenia[i][2*j + 1] += " ";
-            do_wyswietlenia[i][2*j + 1] += "   ║";
-            if(j == pola_gry[i].size() - 1){
-                do_wyswietlenia[i][2*j + 2] = "║      ║";
-                do_wyswietlenia[i][2*j + 3] = "║   ";
-                if(pola_gry[i][j].getSymbol()!=10) do_wyswietlenia[i][2*j + 3] +=" ";
-                do_wyswietlenia[i][2*j + 3] += pola_gry[i][j].wyswietl() + "║";
-                do_wyswietlenia[i][2*j+4] = "╚══════╝";
+        if(pola_gry[i].empty()){
+            do_wyswietlenia[i][0]="┌──────┐";
+            do_wyswietlenia[i][1]="│      │";
+            do_wyswietlenia[i][2]="│      │";
+            do_wyswietlenia[i][3]="│      │";
+            do_wyswietlenia[i][4]="└──────┘";
+        }
+        else{
+            for(int j=0;j<pola_gry[i].size();j++){
+                do_wyswietlenia[i][2*j] = "╔══════╗";
+                do_wyswietlenia[i][2*j + 1] = "║" + pola_gry[i][j].wyswietl();
+                if(pola_gry[i][j].getSymbol()!=10) do_wyswietlenia[i][2*j + 1] += " ";
+                do_wyswietlenia[i][2*j + 1] += "   ║";
+                if(j == pola_gry[i].size() - 1){
+                    do_wyswietlenia[i][2*j + 2] = "║      ║";
+                    do_wyswietlenia[i][2*j + 3] = "║   ";
+                    if(pola_gry[i][j].getSymbol()!=10) do_wyswietlenia[i][2*j + 3] +=" ";
+                    do_wyswietlenia[i][2*j + 3] += pola_gry[i][j].wyswietl() + "║";
+                    do_wyswietlenia[i][2*j+4] = "╚══════╝";
+                }
             }
         }
     }
@@ -341,4 +351,9 @@ ruch dekoduj(const std::string komenda,bool& poprawnosc){
 }
 void tasuj(pasjans& gra){
     gra.rozdajKraty();
+}
+void pasjans::wczytaj_talie(const std::vector<std::vector<karta> > gry, const std::vector<karta> docelowe, const std::vector<karta> pomocnicze){
+    pola_gry = gry;
+    pola_docelowe = docelowe;
+    pola_pomocnicze = pomocnicze;
 }

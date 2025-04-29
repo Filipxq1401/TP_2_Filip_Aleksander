@@ -44,5 +44,6 @@ public:
     void wykonajRuch(const ruch dobry_ruch);
     void ustawCls(const bool czyszczenie);
     std::vector<std::vector<karta> > getPola_gry() const;
+    void wczytaj_talie(const std::vector<std::vector<karta> > gry, const std::vector<karta> docelowe, const std::vector<karta> pomocnicze);
 };
 void tasuj(pasjans& gra);

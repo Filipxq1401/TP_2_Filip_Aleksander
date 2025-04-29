@@ -22,11 +22,11 @@ int main() {
 	gra.ustawCls(czy_cls);
 	std::cin.ignore();
 	while (!gra.czyKoniec()){
+		gra.wyswietl_ladne();
 		if(!gra.czyJestRuch()){
 			std::cout<<"Przegrana - brak dostępnych ruchów";
 			return 0;
 		}
-		gra.wyswietl_ladne();
 		std::cout<<"Podaj następny ruch";
 		if(tura == 1) std::cout<<"(napisz help aby wyświetlić jak wpisać ruch): ";
 		else std::cout<<": ";
@@ -42,6 +42,7 @@ int main() {
 		gra.wykonajRuch(aktualny_ruch);
 		tura++;
 	}
+	gra.wyswietl_ladne();
 	std::cout<<"Wygrana - ułożyłeś te rozdanie w "<<tura-1<<" ruchów";
 	return 0;
 }
